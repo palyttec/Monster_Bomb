@@ -9,11 +9,14 @@ public class MoveMonster : MonoBehaviour
 
     void OnMouseDrag() // функция нажатия мышки и движение по объекту
     {
-        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition); // переменная 
-        mousePos.x = mousePos.x > 2f ? 2f : mousePos.x; // проверка(если переменная больше то устанавление лимита)
-        mousePos.x = mousePos.x < -2f ? -2f : mousePos.x;
-        monster.position = Vector2.MoveTowards(monster.position, 
-            new Vector2(mousePos.x, monster.position.y),
-            speed * Time.deltaTime); // позиция игрока движение по горизонтали
+        if (!Monster.lose) // пока мы не проиграли делаем проверки и герой двигается 
+        {
+            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition); // переменная 
+            mousePos.x = mousePos.x > 2f ? 2f : mousePos.x; // проверка(если переменная больше то устанавление лимита)
+            mousePos.x = mousePos.x < -2f ? -2f : mousePos.x;
+            monster.position = Vector2.MoveTowards(monster.position,
+                new Vector2(mousePos.x, monster.position.y),
+                speed * Time.deltaTime); // позиция игрока движение по горизонтали
+        }
     }
 }
